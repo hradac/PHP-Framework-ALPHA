@@ -1,2 +1,7 @@
+TODO:
+Implement improved security features:
+    -Restricted file access (Cannot access a PHP file directly)
+    -Sanitize input data
+
 Features(v0.1):
     -Automatic path resolution
