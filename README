@@ -2,6 +2,9 @@ TODO:
 Implement improved security features:
     -Restricted file access (Cannot access a PHP file directly)
     -Sanitize input data
+    -Create an automatic object relational mapper (ORM) for app setup
+    -Update database abstraction layer to use databases other than MySQL
 
 Features(v0.1):
     -Automatic path resolution
+    -MySQL database abstraction layer
