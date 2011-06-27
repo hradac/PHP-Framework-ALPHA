@@ -16,11 +16,3 @@ define('DB_LOGIN', 'database_login');
 define('DB_PASSWORD', 'database_password');
 define('DATABASE', 'database_name');
 
-/**
- * For testing and development
- */
-function pre($array){
-    echo '<pre>';
-    print_r($array);
-    echo '</pre>';
-}

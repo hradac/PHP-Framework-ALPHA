@@ -12,42 +12,6 @@ $presenters_folder          = 'presenters';
 $views_folder               = 'views';
 $system_folder              = 'system';
 
-define('PATH_DELIM', '/');
-// If this a windows system then replace backslashes with forward slashes.
-// This is for consistency.
-$basepath = str_replace('\\', PATH_DELIM, dirname(__FILE__));
-
-define('BASEPATH', $basepath . PATH_DELIM);
-
-define('SYSTEM', BASEPATH . $system_folder . PATH_DELIM);
-define('APPPATH', BASEPATH . $application_folder . PATH_DELIM);
-define('APPCODE', BASEPATH . $application_code_folder . PATH_DELIM);
-
-define('MODELPATH', APPPATH . $models_folder . PATH_DELIM);
-define('PRESENTERPATH', APPPATH . $presenters_folder . PATH_DELIM);
-define('VIEWPATH', APPPATH . $views_folder . PATH_DELIM);
-
-define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
-
-define('DB_HOST', 'localhost');
-define('DB_LOGIN', 'cis20739');
-define('DB_PASSWORD', 'lccc1234');
-define('DATABASE', 'cis20739db');
-
-define('AJAX_LINK_CLASS', 'ajaxLink');
-define('PRESENTER_DEFAULT_METHOD', '_default');
-
-# -- For testing and development --
-
-function pre($array){
-    echo '<pre>';
-    print_r($array);
-    echo '</pre>';
-}
-function println($var){
-    echo $var.'<br />';
-}
-# -- End testing and development functions --
 
 
 # -- Start path determination code --
@@ -55,17 +19,7 @@ function println($var){
 // The following code is used to determine what to display (i.e. which 
 // presenter, and which function of that presenter to use)
 
-$request_uri = $_SERVER['REQUEST_URI'];
 
-// Just in case the requested URI has a trailing slash this removes it.
-if(substr($request_uri, -1) == PATH_DELIM){
-    $request_uri = substr($request_uri, 0, (strlen($request_uri) - 1) );
-}
-// $WEBPATH is the complete URL of the base diretory of this site, including whatever sub folder is my reside in.
-//$WEBPATH = 'http://' . $_SERVER['HTTP_HOST'] . stristr($request_uri, SELF, true);
-// Had to rewrite this because the school server doesn't use php 5.3
-$WEBPATH = 'http://' . $_SERVER['HTTP_HOST'] . str_replace(stristr($request_uri, PATH_DELIM . SELF), '', $request_uri) . '/';
-define('WEBPATH', $WEBPATH);
 // $_PATH is an array of entries that come after index.php
 $_PATH = explode(PATH_DELIM, substr(stristr($request_uri, SELF), strlen(SELF . PATH_DELIM)));
 
@@ -74,7 +28,7 @@ $_PATH = explode(PATH_DELIM, substr(stristr($request_uri, SELF), strlen(SELF . P
 # -- Setup Database Connection --
 $_DB = connectToDB();
 function connectToDB(){
-    require_once APPCODE . 'DatabaseConnection.php';
+    require_once SYSTEM . 'DatabaseConnection.php';
     return new DatabaseConnection();
 }
 # -- End Database Connection --
